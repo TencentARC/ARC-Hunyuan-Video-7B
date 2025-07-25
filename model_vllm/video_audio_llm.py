@@ -10,6 +10,7 @@ import tempfile
 import shutil
 
 import torch
+from huggingface_hub import snapshot_download
 
 from transformers import AutoTokenizer, AutoConfig, PretrainedConfig
 from vllm import LLM, SamplingParams
@@ -98,6 +99,8 @@ class VideoAudioLLM:
         device_llm="cuda",
         **kwargs,
     ):
+        if not os.path.isdir(model_path):
+            model_path = snapshot_download(repo_id=model_path)
 
         self.config = AutoConfig.from_pretrained(model_path)
         self.device_enc = device_enc
