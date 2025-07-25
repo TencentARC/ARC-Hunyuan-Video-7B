@@ -29,7 +29,7 @@ The model is capable of multi-granularity timestamped video captioning and summa
 video reasoning as below,
 
 <p align="center">
-    <img src="https://github.com/TencentARC/ARC-Hunyuan-Video-7B/blob/main/figures/teaser.jpg?raw=true" width="90%"/>
+    <img src="https://github.com/TencentARC/ARC-Hunyuan-Video-7B/blob/master/figures/teaser.jpg?raw=true" width="90%"/>
 <p>
 
 Specifically, ARC-Hunyuan-Video-7B is built on top of the Hunyuan-7B vision-language model with the following key designs to meet the requirements of effective structured video comprehension:
@@ -41,7 +41,7 @@ Specifically, ARC-Hunyuan-Video-7B is built on top of the Hunyuan-7B vision-lang
   tasks with RL is key to unlocking high-quality, subjective understanding
 
 <p align="center">
-    <img src="https://github.com/TencentARC/ARC-Hunyuan-Video-7B/blob/main/figures/method.jpg?raw=true" width="95%"/>
+    <img src="https://github.com/TencentARC/ARC-Hunyuan-Video-7B/blob/master/figures/method.jpg?raw=true" width="95%"/>
 <p>
 
 ## News
