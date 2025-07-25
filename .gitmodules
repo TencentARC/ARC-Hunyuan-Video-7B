@@ -1,0 +1,3 @@
+[submodule "model_vllm/vllm"]
+	path = model_vllm/vllm
+	url = https://github.com/TencentARC/vllm.git/
