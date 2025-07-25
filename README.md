@@ -58,17 +58,24 @@ Clone the repo and install dependent packages
 ```bash
 git clone https://github.com/TencentARC/ARC-Hunyuan-Video-7B.git
 cd ARC-Hunyuan-Video-7B
+# Install torch 2.6.0
+pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124
 pip install -r requirements.txt
 pip install git+https://github.com/liyz15/transformers.git@arc_hunyuan_video
 
-# For vllm, please follow the instructions below,
+# Install flash-attention based on your python version
+# If you are unable to install flash-attention, you can modify attn_implementation to "sdpa" in video_inference.py
+pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.4.post1/flash_attn-2.7.4.post1+cu12torch2.6cxx11abiFALSE-cp311-cp311-linux_x86_64.whl
+
+
+# (Optional) For vllm, please follow the instructions below,
 git submodule update --init --recursive
 cd model_vllm/vllm/
 export SETUPTOOLS_SCM_PRETEND_VERSION="0.8.5"
 wget https://wheels.vllm.ai/ed2462030f2ccc84be13d8bb2c7476c84930fb71/vllm-1.0.0.dev-cp38-abi3-manylinux1_x86_64.whl
-export VLLM_PRECOMPILED_WHEEL_LOCATION=path_of_whl
+export VLLM_PRECOMPILED_WHEEL_LOCATION=$(pwd)/vllm-1.0.0.dev-cp38-abi3-manylinux1_x86_64.whl
 pip install --editable .
-# Please install corresponding package based on your python version
+# Install flash-attention if you haven't installed it
 pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.4.post1/flash_attn-2.7.4.post1+cu12torch2.6cxx11abiFALSE-cp311-cp311-linux_x86_64.whl
 ```
 
