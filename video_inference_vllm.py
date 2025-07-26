@@ -5,7 +5,6 @@ import argparse
 import time
 import numpy as np
 import torchvision.transforms as T
-from decord import VideoReader, cpu
 from PIL import Image, ImageDraw, ImageFont
 from moviepy.editor import VideoFileClip
 from pydub import AudioSegment
@@ -14,6 +13,7 @@ from transformers import WhisperFeatureExtractor
 import model_vllm.monkey_patch_mrope
 from model_vllm import VideoAudioLLM
 
+from decord import VideoReader, cpu
 
 class VideoProcessorConfig:
     """配置视频处理相关参数"""
