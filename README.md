@@ -8,6 +8,7 @@
 
 <sub>
 Please note that in our Demo, ARC-Hunyuan-Video-7B is the model consistent with the model checkpoint and the one described in the paper, while ARC-Hunyuan-Video-7B-V0 only supports video description and summarization in Chinese.
+Due to API file size limits, our demo uses compressed input video resolutions, which may cause slight performance differences from the paper. For original results, please run locally.
 </sub>
 
 ## Introduction
@@ -47,7 +48,7 @@ Specifically, ARC-Hunyuan-Video-7B is built on top of the Hunyuan-7B vision-lang
 ## News
 
 - 2025.07.25: We release the [model checkpoint](https://huggingface.co/TencentARC/ARC-Hunyuan-Video-7B) and inference code of ARC-Hunyuan-Video-7B including [vLLM](https://github.com/vllm-project/vllm) version.
-- 2025.07.25: We release the [API service](https://arc.tencent.com/en/document/ARC-Video-7B) of ARC-Hunyuan-Video-7B, which is supported by [vLLM](https://github.com/vllm-project/vllm). We release two versions: one is V0, which only supports video description and summarization in Chinese; the other is the version consistent with the model checkpoint and the one described in the paper.
+- 2025.07.25: We release the [API service](https://arc.tencent.com/zh/document/ARC-Hunyuan-Video-7B) of ARC-Hunyuan-Video-7B, which is supported by [vLLM](https://github.com/vllm-project/vllm). We release two versions: one is V0, which only supports video description and summarization in Chinese; the other is the version consistent with the model checkpoint and the one described in the paper.
 
 ## Usage
 
@@ -101,11 +102,13 @@ python3 video_inference_vllm.py
 
 ## API service
 
-We also provide access to the model via API, which is supported by [vLLM](https://github.com/vllm-project/vllm). For details, please refer to the [documentation](https://arc.tencent.com/en/document/ARC-Video-7B).
+We also provide access to the model via API, which is supported by [vLLM](https://github.com/vllm-project/vllm). For details, please refer to the [documentation](https://arc.tencent.com/zh/document/ARC-Hunyuan-Video-7B).
 
-We release two versions: one is V0, which only supports video description and summarization in Chinese; the other is the version consistent with the model checkpoint and the one described in the paper, which is capable of multi-granularity timestamped video captioning and summarization, open-ended video question answering, temporal video grounding, and video reasoning ( It supports Chinese and English videos and particularly excels at Chinese).
+We release two versions: one is V0, which only supports video description and summarization in Chinese; the other is the version consistent with the model checkpoint and the one described in the paper, which is capable of multi-granularity timestamped video captioning and summarization, open-ended video question answering, temporal video grounding, and video reasoning (It supports Chinese and English videos and particularly excels at Chinese).
 
-If you only need to understand and summarize short Chinese videos, we recommend using the V0 version
+If you only need to understand and summarize short Chinese videos, we recommend using the V0 version.
+
+Due to video file size limitations imposed by the deployment API, we compressed input video resolutions for our online demo and API services. Consequently, model performance in these interfaces may slightly deviate from the results reported in the paper. To reproduce the original performance, we recommend local inference.
 
 ## Future Work
 
