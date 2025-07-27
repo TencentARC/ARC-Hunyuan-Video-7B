@@ -18,6 +18,8 @@ Understanding user-generated videos is actually challenging due to their complex
 information density in both visuals and audio, and fast pacing that focuses on emotional expression and viewpoint delivery.
 To address this challenge, ARC-Hunyuan-Video-7B
 processes visual, audio, and textual signals end-to-end for a deep, structured understanding of video through integrating and reasoning over multimodal cues.
+Stress test reports show an inference time of just 10 seconds for a one-minute video on H20 GPU, yielding an average of 500 tokens, with
+inference accelerated by the vLLM framework.
 
 Compared to prior arts, we introduces a new paradigm of **Structured Video Comprehension**, with capabilities including:
 
