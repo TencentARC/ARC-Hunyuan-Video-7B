@@ -125,7 +125,8 @@ def prepare_inputs(question: str, video_path: str, audio_path: str = None, task:
     # Truncate video frames to match audio duration
     # The audio duration will be truncated in the model
     duration = min(video_duration, audio_duration)
-    video_frames = video_frames[: int(duration * sample_fps)]
+    if duration <= 150:
+        video_frames = video_frames[: int(duration * sample_fps)]
 
     prompt = build_prompt(question, len(video_frames), task)
 
