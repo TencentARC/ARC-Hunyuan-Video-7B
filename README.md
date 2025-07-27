@@ -89,6 +89,11 @@ pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.
 - Download [ARC-Hunyuan-Video-7B](https://huggingface.co/TencentARC/ARC-Hunyuan-Video-7B) including ViT and LLM and the original [whisper-large-v3](https://huggingface.co/openai/whisper-large-v3) .
 
 ### Inference
+```bash
+# Our model currently excels at processing short videos of up to 5 minutes.
+# If your video is longer, we recommend following the approach used in our demo and API:
+# split the video into segments for inference, and then use an LLM to integrate the results.
+```
 
 #### Inference without vllm
 
