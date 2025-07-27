@@ -23,7 +23,7 @@ class VideoProcessorConfig:
         self.factor = 2
         self.dtype = torch.bfloat16
         self.device_enc = "cuda:0"
-        self.device_llm = "cuda:0"
+        self.device_llm = "cuda:1"
         self.pretrain_path = 'TencentARC/ARC-Hunyuan-Video-7B'
         self.hunyuan_mean = (0.48145466, 0.4578275, 0.40821073)
         self.hunyuan_std = (0.26862954, 0.26130258, 0.27577711)
