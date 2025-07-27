@@ -54,8 +54,8 @@ Specifically, ARC-Hunyuan-Video-7B is built on top of the Hunyuan-7B vision-lang
 
 ## Usage
 ### Dependencies
-Our inference can be performed on a single NVIDIA A100 40GB GPU.
-
+- Our inference can be performed on a single NVIDIA A100 40GB GPU.
+- For the vLLM deployment version, we recommend using two NVIDIA A100 40GB GPUs.
 ### Installation
 
 Clone the repo and install dependent packages
