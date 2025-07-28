@@ -1,7 +1,7 @@
 # ARC-Hunyuan-Video-7B
 
 <!-- [![arXiv](https://img.shields.io/badge/arXiv-2404.14396-b31b1b.svg)](https://arxiv.org/abs/2404.14396)-->
-
+[![Paper](https://img.shields.io/badge/Paper-orange)](https://github.com/TencentARC/ARC-Hunyuan-Video-7B/blob/master/ARC_Hunyuan_Video_7B.pdf)
 [![Demo](https://img.shields.io/badge/ARC-Demo-blue)](https://arc.tencent.com/en/ai-demos/multimodal)
 [![Static Badge](https://img.shields.io/badge/Model-Huggingface-yellow)](https://huggingface.co/TencentARC/ARC-Hunyuan-Video-7B)
 [![Blog](https://img.shields.io/badge/ARC-Blog-green)](https://tencentarc.github.io/posts/arc-video-announcement/)
@@ -51,6 +51,11 @@ Specifically, ARC-Hunyuan-Video-7B is built on top of the Hunyuan-7B vision-lang
 
 - 2025.07.25: We release the [model checkpoint](https://huggingface.co/TencentARC/ARC-Hunyuan-Video-7B) and inference code of ARC-Hunyuan-Video-7B including [vLLM](https://github.com/vllm-project/vllm) version.
 - 2025.07.25: We release the [API service](https://arc.tencent.com/zh/document/ARC-Hunyuan-Video-7B) of ARC-Hunyuan-Video-7B, which is supported by [vLLM](https://github.com/vllm-project/vllm). We release two versions: one is V0, which only supports video description and summarization in Chinese; the other is the version consistent with the model checkpoint and the one described in the paper.
+
+## TODOs
+- [ ] Relase ShortVid-Bench, a specialized, human-annotated benchmark with multiple-choice questions
+- [ ] Release training code for instruction tuning
+
 
 ## Usage
 ### Dependencies
