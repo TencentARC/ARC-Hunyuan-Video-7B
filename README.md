@@ -48,6 +48,7 @@ Specifically, ARC-Hunyuan-Video-7B is built on top of the Hunyuan-7B vision-lang
 
 ## News
 
+- 2025.07.29: We release the training code for instruction tuning.
 - 2025.07.25: We release the [model checkpoint](https://huggingface.co/TencentARC/ARC-Hunyuan-Video-7B) and inference code of ARC-Hunyuan-Video-7B including [vLLM](https://github.com/vllm-project/vllm) version.
 - 2025.07.25: We release the [API service](https://arc.tencent.com/zh/document/ARC-Hunyuan-Video-7B) of ARC-Hunyuan-Video-7B, which is supported by [vLLM](https://github.com/vllm-project/vllm). We release two versions: one is V0, which only supports video description and summarization in Chinese; the other is the version consistent with the model checkpoint and the one described in the paper.
 
@@ -209,7 +210,7 @@ We observe that incorporating generic video datasets during training may inadver
 If you find the work helpful, please consider citing:
 
 ```bash
-@article{ge2025seed,
+@article{ge2025arc,
   title={ARC-Hunyuan-Video-7B: Structured Video Comprehension of Real-World Shorts},
   author={Ge, Yuying and Ge, Yixiao and Li, Chen and Wang, Teng and Pu, Junfu and Li, Yizhuo and Qiu, Lu and Ma, Jin and Duan, Lisheng and Zuo, Xinyu and Luo, Jinwen and Gu, Weibo and Li, Zexuan and Zhang, Xiaojing and Tao, Yangyu and Hu, Han and Wang, Di and Shan Ying},
   journal={arXiv preprint arXiv:2507.20939},
