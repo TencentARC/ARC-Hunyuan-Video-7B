@@ -1,7 +1,6 @@
 # ARC-Hunyuan-Video-7B
 
-<!-- [![arXiv](https://img.shields.io/badge/arXiv-2404.14396-b31b1b.svg)](https://arxiv.org/abs/2404.14396)-->
-[![Paper](https://img.shields.io/badge/Paper-orange)](https://github.com/TencentARC/ARC-Hunyuan-Video-7B/blob/master/ARC_Hunyuan_Video_7B.pdf)
+[![arXiv](https://img.shields.io/badge/arXiv-2507.20939-b31b1b.svg)](https://arxiv.org/abs/2507.20939)
 [![Demo](https://img.shields.io/badge/ARC-Demo-blue)](https://arc.tencent.com/en/ai-demos/multimodal)
 [![Static Badge](https://img.shields.io/badge/Model-Huggingface-yellow)](https://huggingface.co/TencentARC/ARC-Hunyuan-Video-7B)
 [![Blog](https://img.shields.io/badge/ARC-Blog-green)](https://tencentarc.github.io/posts/arc-video-announcement/)
@@ -129,16 +128,15 @@ Due to video file size limitations imposed by the deployment API, we compressed 
 
 We observe that incorporating generic video datasets during training may inadvertently compromise the model's capacity for real-world video understanding, potentially due to domain shift or noise introduced by non-real-world samples. To address this limitation, we plan to develop a dedicated model trained exclusively on rigorously curated real-world video data.
 
-<!-- ## Citation
+## Citation
 
 If you find the work helpful, please consider citing:
 
 ```bash
-@article{ge2024seed,
-  title={SEED-X: Multimodal Models with Unified Multi-granularity Comprehension and Generation},
-  author={Ge, Yuying and Zhao, Sijie and Zhu, Jinguo and Ge, Yixiao and Yi, Kun and Song, Lin and Li, Chen and Ding, Xiaohan and Shan, Ying},
-  journal={arXiv preprint arXiv:2404.14396},
-  year={2024}
+@article{ge2025seed,
+  title={ARC-Hunyuan-Video-7B: Structured Video Comprehension of Real-World Shorts},
+  author={Ge, Yuying and Ge, Yixiao and Li, Chen and Wang, Teng and Pu, Junfu and Li, Yizhuo and Qiu, Lu and Ma, Jin and Duan, Lisheng and Zuo, Xinyu and Luo, Jinwen and Gu, Weibo and Li, Zexuan and Zhang, Xiaojing and Tao, Yangyu and Hu, Han and Wang, Di and Shan Ying},
+  journal={arXiv preprint arXiv:2507.20939},
+  year={2025}
 }
 ```
--->
