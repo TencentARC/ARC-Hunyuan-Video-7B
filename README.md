@@ -52,14 +52,17 @@ Specifically, ARC-Hunyuan-Video-7B is built on top of the Hunyuan-7B vision-lang
 - 2025.07.25: We release the [API service](https://arc.tencent.com/zh/document/ARC-Hunyuan-Video-7B) of ARC-Hunyuan-Video-7B, which is supported by [vLLM](https://github.com/vllm-project/vllm). We release two versions: one is V0, which only supports video description and summarization in Chinese; the other is the version consistent with the model checkpoint and the one described in the paper.
 
 ## TODOs
+
 - [ ] Relase ShortVid-Bench, a specialized, human-annotated benchmark with multiple-choice questions
 - [ ] Release training code for instruction tuning
 
-
 ## Usage
+
 ### Dependencies
+
 - Our inference can be performed on a single NVIDIA A100 40GB GPU.
 - For the vLLM deployment version, we recommend using two NVIDIA A100 40GB GPUs.
+
 ### Installation
 
 Clone the repo and install dependent packages
@@ -93,6 +96,7 @@ pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.
 - Download [ARC-Hunyuan-Video-7B](https://huggingface.co/TencentARC/ARC-Hunyuan-Video-7B) including ViT and LLM and the original [whisper-large-v3](https://huggingface.co/openai/whisper-large-v3) .
 
 ### Inference
+
 ```bash
 # Our model currently excels at processing short videos of up to 5 minutes.
 # If your video is longer, we recommend following the approach used in our demo and API:
@@ -113,11 +117,83 @@ cd ARC-Hunyuan-Video-7B
 python3 video_inference_vllm.py
 ```
 
+## Training
+
+### Installation
+
+Clone the repo and install dependent packages
+
+```bash
+git clone https://github.com/TencentARC/ARC-Hunyuan-Video-7B.git
+cd ARC-Hunyuan-Video-7B
+# Install torch 2.6.0
+pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+pip install -r requirements.txt
+pip install git+https://github.com/liyz15/transformers.git@arc_hunyuan_video
+
+# For training
+pip install accelerate==1.9.0
+#Upgrade the GCC version to 9.0 or above
+sudo dnf install gcc-toolset-9
+scl enable gcc-toolset-9 bash
+source /opt/rh/gcc-toolset-9/enable
+gcc -v
+```
+
+### Model Weights
+
+- Download [ARC-Hunyuan-Video-7B](https://huggingface.co/TencentARC/ARC-Hunyuan-Video-7B) including ViT and LLM and the original [whisper-large-v3](https://huggingface.co/openai/whisper-large-v3) .
+
+### Data Preparation
+
+Please follow the format of "sft_data/sft_jb_sp_kd_10.json".
+
+- "root" specifies the path of training videos (supports .mp4; videos shorter than 5 minutes yield better results).
+- "audio_root" specifies the path of corresponding audios (Please use the .mp3 format). You can use the code below to extract audio from a video and save it.
+
+```bash
+from moviepy.editor import VideoFileClip
+from pydub import AudioSegment
+
+video = VideoFileClip(video_path)
+if video.audio is not None:
+    video.audio.write_audiofile(audio_path, logger=None)
+    video.audio.close()
+else:
+    duration_ms = int(video.duration * 1000)
+    silent_audio = AudioSegment.silent(duration=duration_ms)
+    silent_audio.export(audio_path, format="mp3")
+video.close()
+```
+
+- "annotation" specifies the path of the annotation in the format of ".jsonl".
+
+### Model Fully-finetune
+
+```bash
+# We use DeepSpeed Zero-3 with two 98G-H20 GPUs.
+bash scripts/arc_hunyuan_video_full_finetune.sh
+```
+
+### Model Inference
+
+After finishing training, the model will be saved in ${OUTPUT_DIR}.
+
+```bash
+# Copy the model-related config files to the directory.
+cd path of the downloaded ARC-Hunyuan-Video-7B
+cp generation_config.json preprocessor_config.json ${OUTPUT_DIR}/checkpoint-500/.
+
+cd ARC-Hunyuan-Video-7B
+# Modify the prompt based on your fine-tuning data, and specify the path of the fine-tuned model.
+python3 video_inference_sft.py
+```
+
 ## API service
 
 We also provide access to the model via API, which is supported by [vLLM](https://github.com/vllm-project/vllm). For details, please refer to the [documentation](https://arc.tencent.com/zh/document/ARC-Hunyuan-Video-7B).
 
-We release two versions: one is V0, which only supports video description and summarization in Chinese; the other is the version consistent with the model checkpoint and the one described in the paper, which is capable of multi-granularity timestamped video captioning and summarization, open-ended video question answering, temporal video grounding, and video reasoning (It supports Chinese and English videos and particularly excels at Chinese). 
+We release two versions: one is V0, which only supports video description and summarization in Chinese; the other is the version consistent with the model checkpoint and the one described in the paper, which is capable of multi-granularity timestamped video captioning and summarization, open-ended video question answering, temporal video grounding, and video reasoning (It supports Chinese and English videos and particularly excels at Chinese).
 For videos longer than 5 minutes, we only support structured descriptions. We process these videos in 5-minute segments and use an LLM to integrate the inference results.
 
 If you only need to understand and summarize short Chinese videos, we recommend using the V0 version.

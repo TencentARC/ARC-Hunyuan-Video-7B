@@ -1,0 +1,11 @@
+{
+    "brief_summary": {
+        "root": "sft_data/videos",
+        "audio_root": "sft_data/audios_mp3",
+        "annotation": "sft_data/sft_jb_sp_abs_10.jsonl",
+        "data_augment": false,
+        "max_dynamic_patch": 1,
+        "repeat_time": 1,
+        "length": "10"
+    }
+}
