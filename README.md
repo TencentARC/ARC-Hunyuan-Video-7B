@@ -54,7 +54,7 @@ Specifically, ARC-Hunyuan-Video-7B is built on top of the Hunyuan-7B vision-lang
 ## TODOs
 
 - [ ] Relase ShortVid-Bench, a specialized, human-annotated benchmark with multiple-choice questions
-- [ ] Release training code for instruction tuning
+- [x] Release training code for instruction tuning
 
 ## Usage
 
