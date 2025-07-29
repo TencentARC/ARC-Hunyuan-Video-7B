@@ -133,7 +133,7 @@ pip install git+https://github.com/liyz15/transformers.git@arc_hunyuan_video
 
 # For training
 pip install accelerate==1.9.0
-#Upgrade the GCC version to 9.0 or above
+# Upgrade the GCC version to 9.0 or above
 sudo dnf install gcc-toolset-9
 scl enable gcc-toolset-9 bash
 source /opt/rh/gcc-toolset-9/enable
@@ -216,3 +216,7 @@ If you find the work helpful, please consider citing:
   year={2025}
 }
 ```
+
+## Acknowledge
+
+Our training code is built upon [InternVL](https://github.com/OpenGVLab/InternVL). Thanks for their excellent work!
