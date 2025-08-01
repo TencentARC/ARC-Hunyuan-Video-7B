@@ -212,7 +212,7 @@ If you find the work helpful, please consider citing:
 ```bash
 @article{ge2025arc,
   title={ARC-Hunyuan-Video-7B: Structured Video Comprehension of Real-World Shorts},
-  author={Ge, Yuying and Ge, Yixiao and Li, Chen and Wang, Teng and Pu, Junfu and Li, Yizhuo and Qiu, Lu and Ma, Jin and Duan, Lisheng and Zuo, Xinyu and Luo, Jinwen and Gu, Weibo and Li, Zexuan and Zhang, Xiaojing and Tao, Yangyu and Hu, Han and Wang, Di and Shan Ying},
+  author={Ge, Yuying and Ge, Yixiao and Li, Chen and Wang, Teng and Pu, Junfu and Li, Yizhuo and Qiu, Lu and Ma, Jin and Duan, Lisheng and Zuo, Xinyu and others},
   journal={arXiv preprint arXiv:2507.20939},
   year={2025}
 }
