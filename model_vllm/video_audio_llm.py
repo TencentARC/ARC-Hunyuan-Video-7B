@@ -153,7 +153,7 @@ class VideoAudioLLM:
             dtype="bfloat16",
             hf_overrides=lambda x: convert_config_to_legacy(x, max_model_len),
             limit_mm_per_prompt={"image": 150},
-            enforce_eager=True,
+            enforce_eager=False,
             disable_mm_preprocessor_cache=True,
             enable_prefix_caching=False,
             device=device,
