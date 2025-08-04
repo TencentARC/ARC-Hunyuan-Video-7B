@@ -115,8 +115,10 @@ class DynamicNTKAlphaMRotaryEmbedding(MRotaryEmbedding):
         dtype: torch.dtype,
         mrope_section: Optional[List[int]] = None,
         is_neox_style: bool = True,
+        max_model_len: bool = None,
     ) -> None:
         self.scaling_alpha = scaling_alpha
+        self.max_model_len = max_model_len
         assert len(mrope_section) == 4, "Currently only 4D is supported"
         mrope_section = [int(x * rotary_dim // 2) for x in mrope_section]
 
@@ -136,8 +138,12 @@ class DynamicNTKAlphaMRotaryEmbedding(MRotaryEmbedding):
         )
     
     def _compute_cos_sin_cache(self) -> torch.Tensor:
-        max_len = self.max_position_embeddings * self.scaling_alpha
-        # max_len = self.max_position_embeddings  # Check this
+        if self.max_model_len is not None:
+            max_len = self.max_model_len
+        else:
+            max_len = self.max_position_embeddings * self.scaling_alpha
+
+
         base = self.base * self.scaling_alpha ** (
             self.rotary_dim / (self.rotary_dim - 2)
         )
@@ -508,6 +514,7 @@ class HunYuanAttention(nn.Module):
                 scaling_alpha=rope_scaling["alpha"],
                 dtype=torch.get_default_dtype(),
                 mrope_section=rope_scaling["mrope_section"],
+                max_model_len=config.max_model_len,
             )
             if config.use_rotary_pos_emb
             else None
