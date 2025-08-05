@@ -19,7 +19,7 @@ from safetensors.torch import load_file as safetensors_load_file
 from model_vllm import VideoAudioEncoder
 
 
-def convert_config_to_legacy(config):
+def convert_config_to_legacy(config, max_model_len):
     legacy_config = PretrainedConfig()
 
     legacy_config.update(config.vision_config.to_dict())
@@ -48,6 +48,7 @@ def convert_config_to_legacy(config):
             "rope_type": "dynamic",
             "mrope_section": [0.25, 0.25, 0.25, 0.25],
         },
+        "max_model_len": max_model_len,
     })
 
     if hasattr(legacy_config, "torch_dtype") and isinstance(legacy_config.torch_dtype, str):
@@ -106,9 +107,9 @@ class VideoAudioLLM:
         self.device_enc = device_enc
         self.device_llm = device_llm
 
-        self.mm_encoder = self.init_mm_encoder(model_path, self.config, self.device_enc)
-
         self.llm, self.sampling_params = self.init_llm(model_path, self.config, self.device_llm, **kwargs)
+
+        self.mm_encoder = self.init_mm_encoder(model_path, self.config, self.device_enc)
 
 
     def init_mm_encoder(self, model_path, config, device):
@@ -140,17 +141,19 @@ class VideoAudioLLM:
             gpu_memory_utilization = 0.9
         else:  # Reserve memory for the encoder
             gpu_memory_utilization = 0.6
+        
+        max_model_len = 20480
 
         llm = LLM(
             model=model_path,
             tokenizer=model_path,
             trust_remote_code=True,
-            max_model_len=20480,
-            max_seq_len_to_capture=20480,
+            max_model_len=max_model_len,
+            max_seq_len_to_capture=max_model_len,
             dtype="bfloat16",
-            hf_overrides=convert_config_to_legacy,
+            hf_overrides=lambda x: convert_config_to_legacy(x, max_model_len),
             limit_mm_per_prompt={"image": 150},
-            enforce_eager=True,
+            enforce_eager=False,
             disable_mm_preprocessor_cache=True,
             enable_prefix_caching=False,
             device=device,
@@ -222,8 +225,6 @@ class VideoAudioLLM:
             }
             for item in batch
         ]
-
-        print(prompts[0]['prompt'], prompts[0]['multi_modal_data']['image']['image_embeds'].shape)
 
         outputs = self.llm.generate(prompts, self.sampling_params, use_tqdm=False)
 

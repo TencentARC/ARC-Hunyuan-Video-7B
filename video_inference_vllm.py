@@ -144,7 +144,7 @@ class HunyuanVideoProcessor:
     def process_audio(self, video_path: str, audio_path: str) -> torch.Tensor:
         video = VideoFileClip(video_path)
         try:
-            video.audio.write_audiofile(audio_path)
+            video.audio.write_audiofile(audio_path, logger=None)
             audio, sr = self.cut_audio_with_librosa(audio_path, max_num_frame=150, segment_sec=2, max_total_sec=300, sr=16000)
         except:
             # when no audios
