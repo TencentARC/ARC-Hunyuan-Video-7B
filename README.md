@@ -48,7 +48,7 @@ Specifically, ARC-Hunyuan-Video-7B is built on top of the Hunyuan-7B vision-lang
 <p>
 
 ## News
-- 2025.08.05: We release ShortVid-Bench, a specialized, human-annotated benchmark with multiple-choice questions for evaluating short-video understanding.
+- 2025.08.05: We release [ShortVid-Bench](https://huggingface.co/datasets/TencentARC/ShortVid-Bench), a specialized, human-annotated benchmark with multiple-choice questions for evaluating short-video understanding.
 - 2025.07.29: We release the training code for instruction tuning.
 - 2025.07.25: We release the [model checkpoint](https://huggingface.co/TencentARC/ARC-Hunyuan-Video-7B) and inference code of ARC-Hunyuan-Video-7B including [vLLM](https://github.com/vllm-project/vllm) version.
 - 2025.07.25: We release the [API service](https://arc.tencent.com/zh/document/ARC-Hunyuan-Video-7B) of ARC-Hunyuan-Video-7B, which is supported by [vLLM](https://github.com/vllm-project/vllm). We release two versions: one is V0, which only supports video description and summarization in Chinese; the other is the version consistent with the model checkpoint and the one described in the paper.
