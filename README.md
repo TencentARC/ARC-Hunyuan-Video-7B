@@ -4,6 +4,7 @@
 [![Demo](https://img.shields.io/badge/ARC-Demo-blue)](https://arc.tencent.com/en/ai-demos/multimodal)
 [![Static Badge](https://img.shields.io/badge/Model-Huggingface-yellow)](https://huggingface.co/TencentARC/ARC-Hunyuan-Video-7B)
 [![Blog](https://img.shields.io/badge/ARC-Blog-green)](https://tencentarc.github.io/posts/arc-video-announcement/)
+[![Benchmark](https://img.shields.io/badge/ShortVid-Bench-orange)](https://huggingface.co/datasets/TencentARC/ShortVid-Bench)
 
 <sub>
 Please note that in our Demo, ARC-Hunyuan-Video-7B is the model consistent with the model checkpoint and the one described in the paper, while ARC-Hunyuan-Video-7B-V0 only supports video description and summarization in Chinese.
@@ -47,22 +48,20 @@ Specifically, ARC-Hunyuan-Video-7B is built on top of the Hunyuan-7B vision-lang
 <p>
 
 ## News
-
+- 2025.08.05: We release ShortVid-Bench, a specialized, human-annotated benchmark with multiple-choice questions for evaluating short-video understanding.
 - 2025.07.29: We release the training code for instruction tuning.
 - 2025.07.25: We release the [model checkpoint](https://huggingface.co/TencentARC/ARC-Hunyuan-Video-7B) and inference code of ARC-Hunyuan-Video-7B including [vLLM](https://github.com/vllm-project/vllm) version.
 - 2025.07.25: We release the [API service](https://arc.tencent.com/zh/document/ARC-Hunyuan-Video-7B) of ARC-Hunyuan-Video-7B, which is supported by [vLLM](https://github.com/vllm-project/vllm). We release two versions: one is V0, which only supports video description and summarization in Chinese; the other is the version consistent with the model checkpoint and the one described in the paper.
 
 ## TODOs
 
-- [ ] Relase ShortVid-Bench, a specialized, human-annotated benchmark with multiple-choice questions
+- [x] Relase ShortVid-Bench, a specialized, human-annotated benchmark with multiple-choice questions
 - [x] Release training code for instruction tuning
 
 ## Usage
 
 ### Dependencies
-
-- Our inference can be performed on a single NVIDIA A100 40GB GPU.
-- For the vLLM deployment version, we recommend using two NVIDIA A100 40GB GPUs.
+Our inference can be performed on a single NVIDIA A100 40GB GPU.
 
 ### Installation
 
@@ -200,6 +199,44 @@ For videos longer than 5 minutes, we only support structured descriptions. We pr
 If you only need to understand and summarize short Chinese videos, we recommend using the V0 version.
 
 Due to video file size limitations imposed by the deployment API, we compressed input video resolutions for our online demo and API services. Consequently, model performance in these interfaces may slightly deviate from the results reported in the paper. To reproduce the original performance, we recommend local inference.
+
+
+## ShortVid-Bench
+
+Existing benchmarks often fall short in capturing the nuanced complexities
+of user-generated content. To rigorously evaluate model’s ability to **understand real-world short videos**,
+we construct a specialized benchmark named **ShortVid-Bench**. Specifically, we develop an automated pipeline
+to generate multi-dimensional questions for each video, targeting capabilities that signify a deep, holistic
+comprehension through integrating both visual and audio cues. These dimensions include: 
+- Temporal Reasoning and Localization
+- Affective Intent Classification
+- Creator Intent Taxonomy
+- Narrative Comprehension
+- Humor & Meme Deconstruction
+- Creative Innovation Analysis
+  
+For objective assessment, we employ a multiple-choice question (MCQ) format following previous work. Each question is carefully curated by human annotators who
+provide the ground-truth answer and design challenging, plausible distractors. Collectively, these dimensions with a total of 1,000 multiple-choice questions
+push the evaluation beyond mere descriptive captioning, demanding a genuine comprehension of the video’s
+context, intent, and narrative.
+
+<p align="center">
+    <img src="https://github.com/TencentARC/ARC-Hunyuan-Video-7B/blob/master/figures/shortvid-bench.jpg?raw=true" width="70%"/>
+<p>
+
+### Model Performance
+| Model | fps | #frames | think | ShortVid-Bench | 
+| :--- | :--- | :--- | :--- | :--- | 
+| Qwen2.5-VL-7B-Instruct | 1.0 | 150 | × | 69.3 |
+| Qwen2.5-Omni-7B | 1.0 | 150 | × | 69.7 |
+| Keye-VL-8B | 1.0 | 150 | ✓ | 56.3 |
+| ARC-Hunyuan-Video-7B | 1.0 | 150 | ✓ | **73.0** | 
+
+<sub>
+Please note that the results in the table above are different from those in 
+<a href="https://arxiv.org/abs/2507.20939" target="_blank">ARC-Hunyuan-Video-7B</a>. 
+This is because, after releasing the technical report, we expanded the benchmark dataset to 1,000 samples, whereas the results in the paper were based on 400 samples.
+</sub>
 
 ## Future Work
 
