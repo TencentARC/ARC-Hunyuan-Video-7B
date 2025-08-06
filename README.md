@@ -70,8 +70,14 @@ Clone the repo and install dependent packages
 ```bash
 git clone https://github.com/TencentARC/ARC-Hunyuan-Video-7B.git
 cd ARC-Hunyuan-Video-7B
-# Install torch 2.6.0
+# Install torch 2.6.0 based on your CUDA version
+# CUDA 11.8
+pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu118
+# CUDA 12.4
 pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+# CUDA 12.6
+pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu126
+
 pip install -r requirements.txt
 pip install git+https://github.com/liyz15/transformers.git@arc_hunyuan_video
 
