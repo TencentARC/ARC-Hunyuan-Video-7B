@@ -11,7 +11,7 @@ import requests
 import torch
 from PIL import Image
 
-from swift.utils import get_env_args
+#from swift.utils import get_env_args
 
 # >>> internvl
 IMAGENET_MEAN = (0.485, 0.456, 0.406)
