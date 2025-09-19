@@ -6,7 +6,7 @@
 [![Blog](https://img.shields.io/badge/ARC-Blog-green)](https://tencentarc.github.io/posts/arc-video-announcement/)
 [![Benchmark](https://img.shields.io/badge/ShortVid-Bench-orange)](https://huggingface.co/datasets/TencentARC/ShortVid-Bench)
 
-In this version, we have switched the base model from hunyuan VLM to [Qwen2.5-VL-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct). We used the same training data and training stages. For a detailed introduction, please refer to the `master` branch.
+In this version, we have switched the base model from hunyuan VLM to [Qwen2.5-VL-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct) and introduce [ARC-Qwen-Video-7B](https://huggingface.co/TencentARC/ARC-Qwen-Video-7B). We used the same training data and training stages. For a detailed introduction, please refer to the `master` branch.
 
 We are also introducing a new model, [ARC-Qwen-Video-7B-Narrator](https://huggingface.co/TencentARC/ARC-Qwen-Video-7B-Narrator). It can output **timestamped video descriptions, speaker identities, and the specific ASR (Automatic Speech Recognition) content**. By processing its output with an external LLM, you can obtain more comprehensive structured information as follows (Click to watch the video):
 
@@ -189,7 +189,7 @@ python3 vllm_arc_qwen_vl_video_batch_narrator.py --batch_inference
 ```
 
 ## Benchmark Performance
-| | Video-MMMU | MMVU | Temp-Compass | Video-Holmes | Video-MME | VCR-Bench | MVBench | ShortVid-Bench | Charades-STA |
+| | Video-MMMU | MMVU | Temp-Compass | Video-Holmes | Video-MME | VCR-Bench | MV-Bench | ShortVid-Bench | Charades-STA |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | ARC-Hunyuan-Video-7B | 31.1 | 49.1 | 66.0 | 40.9 | 58.7 | 50.5 | **62.6** | **73.0** | **54.8** |
 | ARC-Qwen-Video-7B | **41.3** | **55.5** | **68.7** | **51.1** | **61.0** | **52.3** | 60.8 | 72.6 | 52.8 |
