@@ -131,7 +131,6 @@ We are also introducing a new model, [ARC-Qwen-Video-7B-Narrator](https://huggin
 
 ### Dependencies
 The installation has been tested and verified on the following environments:
-*   NVIDIA A100 with CUDA 12.1
 *   NVIDIA H20 with CUDA 12.4
 
 ### Installation
