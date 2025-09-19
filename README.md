@@ -188,6 +188,13 @@ python3 vllm_arc_qwen_vl_video_batch.py --batch_inference
 python3 vllm_arc_qwen_vl_video_batch_narrator.py --batch_inference
 ```
 
+## Benchmark Performance
+| | Video-MMMU | MMVU | Temp-Compass | Video-Holmes | Video-MME | VCR-Bench | MVBench | ShortVid-Bench | Charades-STA |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| ARC-Hunyuan-Video-7B | 31.1 | 49.1 | 66.0 | 40.9 | 58.7 | 50.5 | **62.6** | **73.0** | **54.8** |
+| ARC-Qwen-Video-7B | **41.3** | **55.5** | **68.7** | **51.1** | **61.0** | **52.3** | 60.8 | 72.6 | 52.8 |
+
+Quantitative evaluation is performed on different benchmarks using accuracy as the evaluation metric, except for the grounding task on Charades-STA, which uses mIoU. For all benchmarks other than VideoMMMU and Charades-STA, we only evaluated the multiple-choice questions.
 
 ## Citation
 
