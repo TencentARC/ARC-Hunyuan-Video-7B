@@ -50,18 +50,13 @@ def load_state_dict_from_safetensors(path: str, prefixes: list[str]):
     return state_dict
 
 def build_prompt(question, task_type):
-    if task_type == "MCQ":
-        return f"{question}\nOutput the thinking process in <think> </think> and final answer (only option index) in <answer> </answer> tags, i.e., <think> reasoning process here </think><answer> answer here </answer>."
-    elif task_type == "Grounding":
-        return f"{question}\nOutput the thinking process in <think> </think> and final answer (only time range) in <answer> </answer> tags, i.e., <think> reasoning process here </think><answer> answer here </answer>."
-    else: # Summary, QA, etc.
-        return f"{question}\nOutput the thinking process in <think> </think> and final answer in <answer> </answer> tags, i.e., <think> reasoning process here </think><answer> answer here </answer>."
+    return f"{question}\nOutput the thinking process in <think> </think> and final answer in <answer> </answer> tags, i.e., <think> reasoning process here </think><answer> answer here </answer>."
 
 
 class ProcessorConfig:
     """配置模型和推理所需的所有参数"""
     def __init__(self):
-        self.model_path = 'TencentARC/ARC-Qwen-Video-7B'
+        self.model_path = 'TencentARC/ARC-Qwen-Video-7B-Narrator'
         self.whisper_path = 'openai/whisper-large-v3'
         self.device = "cuda"
         self.dtype = torch.bfloat16
@@ -213,49 +208,7 @@ def get_sample_data():
     # Summary task
     video_paths.append(video_path)
     tasks.append('Summary')
-    title = "白金枪鱼寿司的陷阱"
-    questions.append(f"该视频标题为{title}\n描述视频内容.")
-
-    # Grounding task
-    video_paths.append(video_path)
-    tasks.append('Grounding')
-    questions.append("我们何时能看到一个穿制服的男人站在菊花门前?")
-
-    # QA task
-    video_paths.append(video_path)
-    tasks.append('QA')
-    questions.append("这个视频有哪些幽默的地方？")
-
-    # MCQ task
-    video_paths.append(video_path)
-    tasks.append('MCQ')
-    questions.append("视频中最后老板提供了什么给顾客？\nA.纸尿裤\nB.寿司\nC.现金\nD.面巾纸")
-
-    # Second video test cases
-    video_path = 'examples/开关.mov'
-
-    # Multi-granularity caption task
-    video_paths.append(video_path)
-    tasks.append('Segment')
-    questions.append("请按时间顺序给出视频的章节摘要和对应时间点")
-
-    #Third video test cases
-    video_path = 'examples/猪排.mp4'
-
-    # Grounding task
-    video_paths.append(video_path)
-    tasks.append('Grounding')
-    questions.append("When will we be able to see the man eat the pork cutlet in the restaurant?")
-
-    #QA task
-    video_paths.append(video_path)
-    tasks.append('QA')
-    questions.append("After the man measures the thickness of the pork cutlet at the beginning of the video, what did he say?")
-
-    # Multi-granularity caption task
-    video_paths.append(video_path)
-    tasks.append('Segment')
-    questions.append("Localize video events with temporal boundaries and the corresponding sentence description.")
+    questions.append("介绍一下视频的主要信息，你的思考过程需要包含ASR的结果。")
 
     return video_paths, questions, tasks
 

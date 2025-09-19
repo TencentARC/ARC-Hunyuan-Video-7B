@@ -85,7 +85,4 @@ class VideoAudioEncoder(nn.Module):
                 vit_embeds, audio_embeds
             )
 
-            # mixed_embeds = mixed_embeds.to(device="cpu").float().share_memory_()
-            # torch.save(mixed_embeds, '/apdcephfs_gy4/share_303218624/yuyingge/Arc_Qwenvl_Video/vllm_embeds.pt')
-
         return mixed_embeds

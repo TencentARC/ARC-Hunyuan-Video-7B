@@ -13,7 +13,7 @@ from vision_process import process_vision_info
 from vision_utils import load_audio_from_video
 
 
-model_path = 'TencentARC/ARC-Qwen-Video-7B'
+model_path = 'TencentARC/ARC-Qwen-Video-7B-Narrator'
 whisper_path = 'openai/whisper-large-v3'
 
 device = "cuda:0"
@@ -35,12 +35,7 @@ print(f"Model and processors loaded in {time.time() - load_start_time:.2f} secon
 
 
 def build_prompt(title, task_type):
-    if task_type == "MCQ":
-        return f"{title}\nOutput the thinking process in <think> </think> and final answer (only option index) in <answer> </answer> tags, i.e., <think> reasoning process here </think><answer> answer here </answer>."
-    elif task_type == "Grounding":
-        return f"{title}\nOutput the thinking process in <think> </think> and final answer (only time range) in <answer> </answer> tags, i.e., <think> reasoning process here </think><answer> answer here </answer>."
-    else:
-        return f"{title}\nOutput the thinking process in <think> </think> and final answer in <answer> </answer> tags, i.e., <think> reasoning process here </think><answer> answer here </answer>."
+    return f"{title}\nOutput the thinking process in <think> </think> and final answer in <answer> </answer> tags, i.e., <think> reasoning process here </think><answer> answer here </answer>."
 
 def run_inference(video_path, title="", task_type="QA"):
 
@@ -137,14 +132,7 @@ if __name__ == "__main__":
     example_base_path = "examples"
         
     examples = [
-        ["寿司.mp4", "该视频标题为白金枪鱼寿司的陷阱\n描述视频内容.", "Summary"],
-        ["寿司.mp4", "我们何时能看到一个穿制服的男人站在菊花门前?", "Grounding"],
-        ["寿司.mp4", "这个视频有哪些幽默的地方？", "QA"],
-        ["寿司.mp4", "视频中最后老板提供了什么给顾客？\nA.纸尿裤\nB.寿司\nC.现金\nD.面巾纸", "MCQ"],
-        ["开关.mov", "请按时间顺序给出视频的章节摘要和对应时间点", "Segment"],
-        ["猪排.mp4", "When will we be able to see the man in the video eat the pork cutlet in the restaurant?", "Grounding"],
-        ["猪排.mp4", "Is the man satisfied with the pork cutlet he cooked at the beginning of the video?", "QA"],
-        ["猪排.mp4", "Localize video chapters with temporal boundaries and the corresponding sentence description.", "Segment"],
+        ["寿司.mp4", "介绍一下视频的主要信息，你的思考过程需要包含ASR的结果。", "Summary"],
     ]
 
     start_time = time.time()
