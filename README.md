@@ -130,9 +130,9 @@ We are also introducing a new model, [ARC-Qwen-Video-7B-Narrator](https://huggin
 ## Usage
 
 ### Dependencies
-Our inference can be performed through:
-- NVIDIA H20
-- CUDA 12.4
+The installation has been tested and verified on the following environments:
+*   NVIDIA A100 with CUDA 12.1
+*   NVIDIA H20 with CUDA 12.4
 
 ### Installation
 
@@ -146,10 +146,11 @@ cd ARC-Hunyuan-Video-7B
 # CUDA 12.4
 pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124
 
-pip install librosa decord av
+pip install librosa decord av accelerate
 pip install flash_attn==2.7.1.post4
 pip uninstall transformers
 pip install git+https://github.com/geyuying/transformers.git@arc-qwen-video
+pip install deepspeed==0.16.9
 
 # (Optional) For vllm, please follow the instructions below,
 pip uninstall vllm
