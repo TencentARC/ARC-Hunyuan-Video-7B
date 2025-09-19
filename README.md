@@ -170,10 +170,10 @@ pip install git+https://github.com/geyuying/vllm.git@arc-qwen-video
 ```bash
 cd ARC-Hunyuan-Video-7B
 
-# For ARC-Hunyuan-Video-7B
+# For ARC-Qwen-Video-7B
 python3 inference_arc_qwen_video.py
 
-# For ARC-Hunyuan-Video-7B-Narrator
+# For ARC-Qwen-Video-7B-Narrator
 python3 inference_arc_qwen_video_narrator.py
 ```
 
@@ -182,10 +182,10 @@ python3 inference_arc_qwen_video_narrator.py
 ```bash
 cd ARC-Hunyuan-Video-7B
 
-# For ARC-Hunyuan-Video-7B
+# For ARC-Qwen-Video-7B
 python3 vllm_arc_qwen_vl_video_batch.py --batch_inference
 
-# For ARC-Hunyuan-Video-7B-Narrator
+# For ARC-Qwen-Video-7B-Narrator
 python3 vllm_arc_qwen_vl_video_batch_narrator.py --batch_inference
 ```
 
