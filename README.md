@@ -171,6 +171,15 @@ pip install git+https://github.com/geyuying/vllm.git@arc-qwen-video
 # split the video into segments for inference, and then use an LLM to integrate the results.
 ```
 
+To quickly verify that your environment is set up correctly and that video and audio information are being processed as expected, you can run the following test case with ARC-Qwen-Video-7B.
+
+```bash
+video_path = "examples/猪排.mp4"
+task = "QA"
+question = "What did the man say at the beginning of the video after measuring the thickness of the fried pork cutlet?"
+```
+Expected Result: If the model's output contains the phrase "So thin", it indicates that your installation is successful.
+
 #### Inference without vllm
 
 ```bash
