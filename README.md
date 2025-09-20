@@ -132,6 +132,7 @@ We are also introducing a new model, [ARC-Qwen-Video-7B-Narrator](https://huggin
 ### Dependencies
 The installation has been tested and verified on the following environments:
 *   NVIDIA H20 with CUDA 12.4
+*   NVIDIA A100 with CUDA 12.1
 
 ### Installation
 
@@ -141,15 +142,21 @@ Clone the repo and install dependent packages
 git clone -b arc-qwen-video https://github.com/TencentARC/ARC-Hunyuan-Video-7B.git
 cd ARC-Hunyuan-Video-7B
 
-# Install torch 2.6.0 
+# Install torch 2.6.0 based on your CUDA version
+# CUDA 11.8
+pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu118
 # CUDA 12.4
 pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+# CUDA 12.6
+pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu126
 
 pip install librosa decord av accelerate
-pip install flash_attn==2.7.1.post4
 pip uninstall transformers
 pip install git+https://github.com/geyuying/transformers.git@arc-qwen-video
-pip install deepspeed==0.16.9
+pip install flash_attn==2.7.1.post4
+
+# Install FFmpeg according to your system, and ensure that the following command produces a normal version output:
+ffmpeg -version
 
 # (Optional) For vllm, please follow the instructions below,
 pip uninstall vllm
