@@ -286,6 +286,8 @@ def load_audio_from_video(video_path: str, sampling_rate: int = 16000):
             warnings.simplefilter("ignore")
             audio, sr = librosa.load(video_path, sr=sampling_rate)
     except Exception as e:
+        print(e)
+        print("Error reading audio; replacing with silent audio. If the video contains an audio track, this indicates that FFmpeg is not installed properly.")
         from decord import VideoReader, cpu
 
         vr = VideoReader(video_path, ctx=cpu(0))
