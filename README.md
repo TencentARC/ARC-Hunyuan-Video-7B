@@ -171,6 +171,30 @@ pip uninstall vllm
 pip install git+https://github.com/geyuying/vllm.git@arc-qwen-video
 ```
 
+#### An 'Ugly' Workaround for vLLM Installation
+If you are unable to install our provided vllm package, we offer an alternative "ugly" method:
+
+1. Install vllm with Qwen2.5-VL support.
+
+2. Modify config.json. In your model weights directory, open config.json and change the architectures field to "Qwen2_5_VLForConditionalGeneration".
+
+3. Patch the vllm source code. Locate the file vllm/model_executor/models/qwen2_5_vl.py in your vllm installation path. Add the following code inside the __init__ method of the Qwen2_5_VLForConditionalGeneration class:
+
+```
+whisper_path = 'openai/whisper-large-v3'
+speech_encoder = WhisperModel.from_pretrained(whisper_path).encoder
+self.speech_encoder = speech_encoder
+speech_dim = speech_encoder.config.d_model
+llm_hidden_size = config.vision_config.out_hidden_size
+self.mlp_speech = nn.Sequential(
+    nn.LayerNorm(speech_dim),
+    nn.Linear(speech_dim, llm_hidden_size),
+    nn.GELU(),
+    nn.Linear(llm_hidden_size, llm_hidden_size)
+)
+```
+**Why this works**: Our model is based on the Qwen-VL-2.5 architecture, with the addition of an audio encoder and a corresponding MLP. During vllm inference, the multi-modal encoder processes inputs sequentially, while the LLM performs batch inference. Since we only need to pass the final multi-modal embeddings to the LLM, we can reuse the existing code for Qwen-VL-2.5.
+
 ### Inference
 
 ```bash
